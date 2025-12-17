@@ -47,6 +47,21 @@ async def chat(request: ChatRequest):
             # Fallback (risky but worth a try if types missing)
             msg = request.user_input 
 
+        # Ensure session exists
+        try:
+            # Attempt to get session; might return None or raise error
+            session = await runner.session_service.get_session(request.session_id)
+        except Exception:
+            session = None
+        
+        if not session:
+             print(f"Creating new session: {request.session_id}")
+             await runner.session_service.create_session(
+                 session_id=request.session_id,
+                 user_id=request.user_id,
+                 app_name="financial_advisor"
+             )
+
         async for event in runner.run_async(
             user_id=request.user_id,
             session_id=request.session_id,
