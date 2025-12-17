@@ -26,7 +26,7 @@ docstring-parser==0.17.0
 fastapi==0.118.0
 fastuuid==0.13.5
 filelock==3.19.1
--e file:///Users/allancastellanos/agentemerc
+
 frozenlist==1.7.0
 fsspec==2025.9.0
 google-adk==1.19.0
