@@ -20,7 +20,24 @@ import google.auth
 
 from . import agent  # noqa: F401
 
-_, project_id = google.auth.default()
+import json
+import tempfile
+
+# Railway Fix: If credentials are passsed as JSON content, save to a temp file
+gac = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+if gac and gac.strip().startswith("{"):
+    print("Detected JSON in GOOGLE_APPLICATION_CREDENTIALS. Writing to temp file...")
+    with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as f:
+        f.write(gac)
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = f.name
+    print(f"Credentials saved to {os.environ['GOOGLE_APPLICATION_CREDENTIALS']}")
+
+try:
+    _, project_id = google.auth.default()
+except Exception as e:
+    print(f"Error loading credentials: {e}")
+    # Fallback/Debugging
+    project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
 os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id)
 os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
