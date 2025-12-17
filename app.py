@@ -18,6 +18,7 @@ app = FastAPI()
 # Use InMemorySessionService for simplicity in demo.
 runner = Runner(
     agent=root_agent,
+    app_name="financial_advisor",
     session_service=InMemorySessionService()
 )
 
