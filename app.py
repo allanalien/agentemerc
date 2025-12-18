@@ -67,27 +67,28 @@ async def chat(request: ChatRequest):
             session_id=request.session_id,
             new_message=msg
         ):
-            # Collect text chunks from events
-            # Event structure: check event.formatted_string or similar
-            # Printing event to see structure if needed, but for now assuming standard output
-            # Usually event has 'text' or 'delta'
-            # Let's assume the ADK event yields partial text or we can inspect it.
-            # event might be an object.
-            # Safe way: print(event) logic
-            pass
-        
-        # Wait, run_async yields events. How do I get the FINAL text?
-        # Usually one of the events contains the agent response.
-        # Or I can use runner.run (sync) but that blocks.
-        # Let's look at `runner.run` return type? It returns None I think, outputs via Session.
-        # But `run_async` yields events.
-        
-        # Let's use `runner.run_async` but we need to know how to extract text.
-        # Documentation unavailable.
-        # Inspecting `event` in loop is needed.
-        # For now, capturing all events and returning as string representation is safe.
-        
-        return {"status": "processed", "note": "Check logs for output (Web interface pending full parsing)"}
+            # Print event for debugging (optional, can be removed)
+            # print(event)
+            
+            # Extract text content from the event
+            # event.content is likely of type google.genai.types.Content or similar schema
+            if hasattr(event, "content") and event.content:
+                 # Check if content has 'parts' or 'text'
+                 # Based on ADK/GenAI types:
+                 if hasattr(event.content, "parts"):
+                     for part in event.content.parts:
+                         if hasattr(part, "text") and part.text:
+                             response_text += part.text
+                 elif hasattr(event.content, "text") and event.content.text:
+                      response_text += event.content.text
+            
+            # Some events might be purely textual in 'formatted_string' or similar if tools are skipped
+            # But the above covers standard model responses.
+
+        return {
+            "status": "processed", 
+            "response": response_text.strip() if response_text else "No text response generated."
+        }
         
     except Exception as e:
         print(f"Error processing chat: {e}")
