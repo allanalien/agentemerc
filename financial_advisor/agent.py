@@ -15,33 +15,19 @@
 """Financial coordinator: provide reasonable investment strategies."""
 
 from google.adk.agents import LlmAgent
-from google.adk.tools.agent_tool import AgentTool
+from financial_advisor.tools.rag_tool import RagTool
 
 from . import prompt
-from .sub_agents.data_analyst import data_analyst_agent
-from .sub_agents.execution_analyst import execution_analyst_agent
-from .sub_agents.risk_analyst import risk_analyst_agent
-from .sub_agents.trading_analyst import trading_analyst_agent
 
 MODEL = "gemini-2.5-pro"
 
-
-financial_coordinator = LlmAgent(
-    name="coordinador_licitaciones",
+# Single Agent Configuration
+market_analyst = LlmAgent(
+    name="analista_mercado",
     model=MODEL,
-    description=(
-        "coordina un equipo de expertos para buscar, analizar y planificar "
-        "la participación en licitaciones públicas y privadas. "
-        "identifica oportunidades, evalúa la viabilidad y diseña estrategias ganadoras."
-    ),
-    instruction=prompt.FINANCIAL_COORDINATOR_PROMPT,
-    output_key="plan_licitacion_output",
-    tools=[
-        AgentTool(agent=data_analyst_agent),
-        AgentTool(agent=trading_analyst_agent),
-        AgentTool(agent=execution_analyst_agent),
-        AgentTool(agent=risk_analyst_agent),
-    ],
+    description="Analista de mercado experto en buscar actualizaciones de licitaciones.",
+    instruction=prompt.MARKET_ANALYST_PROMPT,
+    tools=[RagTool()],
 )
 
-root_agent = financial_coordinator
+root_agent = market_analyst
