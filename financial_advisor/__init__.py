@@ -40,4 +40,4 @@ except Exception as e:
     project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
 os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id)
 os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
-os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
+os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "False")
