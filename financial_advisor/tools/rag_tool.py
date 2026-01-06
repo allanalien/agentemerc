@@ -78,12 +78,14 @@ class RagSystem:
                     institucion = meta.get('institucion', 'No especificada')
                     tipo = meta.get('tipo_procedimiento', 'No especificado')
                     estado = meta.get('estatus_contrato', 'No especificado')
+                    url = meta.get('url', meta.get('link', 'No disponible'))
                     
                     meta_str = (
                         f"Institución: {institucion}\n"
                         f"Monto Estimado: {monto}\n"
                         f"Tipo: {tipo}\n"
                         f"Estado: {estado}\n"
+                        f"URL: {url}\n"
                     )
 
                 results.append(f"ID: {doc_id}\nDate: {date}\n{meta_str}Content: {content}\n---")

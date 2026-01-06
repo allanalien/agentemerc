@@ -29,11 +29,12 @@ Instrucciones:
 
     **Licitación [ID]**:
 
-    *   **Descripción:** [Descripción del contenido]
     *   **Institución:** [Nombre de la institución]
-    *   **Proveedor:** [Nombre del proveedor si está disponible]
+    *   **Descripción:** [Descripción del contenido]
     *   **Importe:** [Monto con formato de moneda]
-    *   **Anuncio:** Ver detalle
+    *   **Fecha de publicación:** [Fecha]
+    *   **Proveedor:** [Nombre del proveedor si está disponible]
+    *   **URL:** Ver más
 
 5.  Si la herramienta no devuelve información relevante, indícalo claramente al usuario.
 6.  Mantén un tono profesional y directo.
