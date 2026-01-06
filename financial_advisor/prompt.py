@@ -29,11 +29,11 @@ Instrucciones:
 
     **Licitación [ID]**:
 
-    *   **Monto:** [Monto con formato de moneda]
-    *   **Descripción:** [Descripción breve del contenido]
+    *   **Descripción:** [Descripción del contenido]
     *   **Institución:** [Nombre de la institución]
-    *   **Proveedor:** [Nombre del proveedor si está disponible en el contenido]
-    *   **Más detalles:** Ver en ComprasMX
+    *   **Proveedor:** [Nombre del proveedor si está disponible]
+    *   **Importe:** [Monto con formato de moneda]
+    *   **Anuncio:** Ver detalle
 
 5.  Si la herramienta no devuelve información relevante, indícalo claramente al usuario.
 6.  Mantén un tono profesional y directo.
