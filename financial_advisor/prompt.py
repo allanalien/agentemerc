@@ -34,7 +34,7 @@ Instrucciones:
     *   **Importe:** [Monto con formato de moneda]
     *   **Fecha de publicación:** [Fecha]
     *   **Proveedor:** [Nombre del proveedor si está disponible]
-    *   **URL:** Ver más
+    *   **URL:** [Ver más](URL encontrada en metadata)
 
 5.  Si la herramienta no devuelve información relevante, indícalo claramente al usuario.
 6.  Mantén un tono profesional y directo.
