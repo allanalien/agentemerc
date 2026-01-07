@@ -73,15 +73,21 @@ class RagSystem:
                 # Format metadata nicely
                 meta_str = ""
                 if isinstance(meta, dict):
-                    # Prioritize key fields
-                    monto = meta.get('monto_sin_imp__minimo', meta.get('importe_drc', 'No especificado'))
-                    institucion = meta.get('institucion', 'No especificada')
+                    # Prioritize key fields with fallback options
+                    title = meta.get('title', meta.get('nombre_procedimiento', meta.get('descripcion', 'Sin título')))
+                    
+                    monto = meta.get('monto_sin_imp__minimo', meta.get('importe_drc', meta.get('amount', meta.get('tender_value_amount', 'No especificado'))))
+                    
+                    institucion = meta.get('institucion', meta.get('buyer_name', 'No especificada'))
+                    
                     tipo = meta.get('tipo_procedimiento', 'No especificado')
                     estado = meta.get('estatus_contrato', 'No especificado')
-                    url = meta.get('url', meta.get('link', 'No disponible'))
+                    
+                    url = meta.get('url', meta.get('link', meta.get('uri', 'No disponible')))
                     
                     meta_str = (
                         f"Institución: {institucion}\n"
+                        f"Título/Descripción: {title}\n"
                         f"Monto Estimado: {monto}\n"
                         f"Tipo: {tipo}\n"
                         f"Estado: {estado}\n"
